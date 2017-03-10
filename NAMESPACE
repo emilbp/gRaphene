@@ -2,6 +2,8 @@
 
 export(gR_summary)
 export(gR_summary_save)
+export(gRdata_map_avg)
+export(gRdata_map_read)
 export(gRdata_read)
 export(multi.fun)
 importFrom(magrittr,"%>%")

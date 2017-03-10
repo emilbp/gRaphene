@@ -27,3 +27,20 @@ gRdata_read <- function(path, ext = "txt", peaks = "^((D\\s)|(G\\s)|(2D\\s)|(aC\
       `2D/G-ratio` = `2D int` / `G int`)
   data
 }
+
+#' Load complete spectrum map from exported txt file
+#'
+#' Load all spectra and corresponding (x,y) coordinates and wrangles into a tidy tibble
+#' @importFrom magrittr %>%
+#' @param path Path to txt file containing the spectrum map
+#' @keywords raman, spectrum map
+#' @export
+#' @examples
+#' gRdata_map_read()
+
+gRdata_map_read <- function(path) {
+  data <- readr::read_tsv(path, col_names = c('x', 'y', 'wavenumber', 'intensity'), skip = 1) %>%
+    dplyr::mutate(id = stringr::str_c(x, ", ", y)) %>%
+    tidyr::spread(key = wavenumber, value = intensity) %>%
+    dplyr::select(-id)
+}
