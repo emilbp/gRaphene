@@ -5,7 +5,7 @@
 \title{Load results of graphene curve fit}
 \usage{
 gr_cf_read(path, ext = "txt",
-  peaks = "^((D\\\\s)|(G\\\\s)|(2D\\\\s)|(aC\\\\s)|(DDp\\\\s)|(2Dp\\\\s)|(2Dpp\\\\s)|(SiO2\\\\s))",
+  peaks = "^((D\\\\s)|(G\\\\s)|(2D\\\\s)|(aC\\\\s)|(DDp\\\\s)|(2Dp\\\\s)|(2Dpp\\\\s)|(SiO2\\\\s)|(Dp\\\\s))",
   measure = "FWHM|pos|int")
 }
 \arguments{
