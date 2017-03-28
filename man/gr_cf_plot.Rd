@@ -4,7 +4,8 @@
 \alias{gr_cf_plot}
 \title{Plot graphene curve fit}
 \usage{
-gr_cf_plot(df, name, scalebar = 1)
+gr_cf_plot(df, name, scalebar = 1, palette = "Spectral",
+  interpolate = FALSE)
 }
 \arguments{
 \item{df}{Dataframe with columns x, y and value}

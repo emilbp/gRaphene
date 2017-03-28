@@ -30,13 +30,13 @@ gr_cf_read <- function(path, ext = "txt", peaks = "^((D\\s)|(G\\s)|(2D\\s)|(aC\\
     tidyr::spread(key = measure, value = value)
 
   if ('D int' %in% colnames(data)) {
-    data <- data %>% mutate(`D/G-ratio` = `D int` / `G int`)
+    data <- data %>% dplyr::mutate(`D/G-ratio` = `D int` / `G int`)
   }
   if ('2D int' %in% colnames(data)) {
-    data <- data %>% mutate(`2D/G-ratio` = `2D int` / `G int`)
+    data <- data %>% dplyr::mutate(`2D/G-ratio` = `2D int` / `G int`)
   }
   if ('Dp int' %in% colnames(data) & 'D int' %in% colnames(data)) {
-    data <- data %>% mutate(`D/Dp-ratio` = `D int` / `Dp int`)
+    data <- data %>% dplyr::mutate(`D/Dp-ratio` = `D int` / `Dp int`)
   }
   data
 }
