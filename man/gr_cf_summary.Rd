@@ -15,4 +15,9 @@ Takes the results of gRdata_read and computes summary statistics
 \examples{
 gr_cf_summary(df_cf)
 }
+\seealso{
+Other curve fit functions: \code{\link{gr_cf_plot_all}},
+  \code{\link{gr_cf_plot}}, \code{\link{gr_cf_read}},
+  \code{\link{gr_cf_summary_save}}
+}
 \keyword{summary}

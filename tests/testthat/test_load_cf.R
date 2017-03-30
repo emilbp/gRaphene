@@ -5,5 +5,5 @@ test_that('gr_cf_read loads all curve fits in a folder', {
   data <- gr_cf_read(folder)
 
   expect_is(data, "tbl_df")
-  expect_true(all(c('xy', 'x', 'y') %in% colnames(data)))
+  expect_true(all(c('id', 'x', 'y') %in% colnames(data)))
 })

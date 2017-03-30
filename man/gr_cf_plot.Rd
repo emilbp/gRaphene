@@ -4,8 +4,7 @@
 \alias{gr_cf_plot}
 \title{Plot graphene curve fit}
 \usage{
-gr_cf_plot(df, name, scalebar = 1, palette = "Spectral",
-  interpolate = FALSE)
+gr_cf_plot(df, name, scalebar = 1, palette = "Spectral")
 }
 \arguments{
 \item{df}{Dataframe with columns x, y and value}
@@ -13,12 +12,20 @@ gr_cf_plot(df, name, scalebar = 1, palette = "Spectral",
 \item{name}{Name of the plot (goes on the colorbar)}
 
 \item{scalebar}{Size of the scalebar (defaults to 1 um)}
+
+\item{palette}{Color palette used in the map. Defaults to Spectral. See `RColorBrewer::display.brewer.all()` for more options}
 }
 \description{
 Accepts a dataframe with columns x, y and value to plot a raster map
 }
 \examples{
 gr_cf_plot(df, "2D/G-ratio", scalebar = 5)
+}
+\seealso{
+Other curve fit functions: \code{\link{gr_cf_plot_all}},
+  \code{\link{gr_cf_read}},
+  \code{\link{gr_cf_summary_save}},
+  \code{\link{gr_cf_summary}}
 }
 \keyword{curve}
 \keyword{fit,}

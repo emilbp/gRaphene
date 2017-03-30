@@ -19,13 +19,14 @@ multi.fun <- function(x) {
 #' @importFrom magrittr %>%
 #' @param df Computes summary (min, mean, max and sd) for \code{df}
 #' @keywords summary
+#' @family curve fit functions
 #' @export
 #' @examples
 #' gr_cf_summary(df_cf)
 
 gr_cf_summary <- function(df) {
   df_summary <- df %>%
-    dplyr::select(-x, -y, -xy) %>%
+    dplyr::select(-x, -y, -id) %>%
     purrr::map(multi.fun) %>%
     tibble::as_tibble()
 
@@ -43,6 +44,7 @@ gr_cf_summary <- function(df) {
 #' @param df_summary Dataframe containing summary statistics
 #' @param filename Filename of csv file (defaults to summary.csv)
 #' @keywords summary
+#' @family curve fit functions
 #' @export
 #' @examples
 #' gr_cf_summary_save(df_summary)

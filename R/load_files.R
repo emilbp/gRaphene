@@ -2,40 +2,41 @@
 #'
 #' Attempts to load all curve fits in txt files from the specified directory
 #'
-#' All files should be named as "<peak> <feature>.txt", e.g. "2D FWHM.txt" and be put in the folder specified under \code{path}
-#' The script automatically looks for the following peaks (unless other parameters are stated under \code{peaks}): D, G, 2D, aC (amorphous carbon), DDp (D+D'), 2Dp (2D'), 2Dpp (2D''), SiO2. It automatically tries to register the features: FWHM, pos and int.
+#' All files should be named as "<peak> <feature>.txt", e.g. "2D FWHM.txt" and be put in the folder specified under \code{path}.
+#' The dataframe that is returned will contain the "<peak> <feature>" as the column names - for this to work, the filenames should only contain letters, numbers and spaces.
 #'
 #' @importFrom magrittr %>%
 #' @param path Directory containing the data-files
 #' @param ext Extension of data-files (default is 'txt')
-#' @param peaks Regex string detailing the peaks to look for
-#' @param measure Features to look for, for each peak
 #' @keywords raman, curve fit
+#' @family curve fit functions
 #' @export
 #' @examples
 #' gr_cf_read("data")
 #' gr_cf_read(system.file('extdata/graphene_curve_fit_export', package = 'gRaphene'))
 
 
-
-gr_cf_read <- function(path, ext = "txt", peaks = "^((D\\s)|(G\\s)|(2D\\s)|(aC\\s)|(DDp\\s)|(2Dp\\s)|(2Dpp\\s)|(SiO2\\s)|(Dp\\s))", measure = "FWHM|pos|int") {
+gr_cf_read <- function(path, ext = "txt") {
   filenames <- list.files(pattern = stringr::str_c('*.',ext), path = path)
+
   data <- tibble::tibble(filename = filenames) %>%
     dplyr::mutate(path = stringr::str_c(path, "/", filename),
       data = purrr::map(path, readr::read_tsv, col_names = c("x", "y", "value"), skip = 1),
-      measure = stringr::str_c(stringr::str_extract(filename, peaks), stringr::str_extract(filename, measure))) %>%
+      measure = stringr::str_extract(filenames, pattern = "[0-9a-zA-ZæøåÆØÅ\\s]*")) %>%
     tidyr::unnest() %>%
     dplyr::mutate(xy = stringr::str_c(x, ", ", y)) %>%
     dplyr::select(xy, x, y, measure, value) %>%
-    tidyr::spread(key = measure, value = value)
+    tidyr::spread(key = measure, value = value) %>%
+    dplyr::mutate(id = 1:n()) %>%
+    dplyr::select(id, everything(), -xy)
 
-  if ('D int' %in% colnames(data)) {
+  if (all(c('D int', 'G int') %in% colnames(data))) {
     data <- data %>% dplyr::mutate(`D/G-ratio` = `D int` / `G int`)
   }
-  if ('2D int' %in% colnames(data)) {
+  if (all(c('2D int', 'G int') %in% colnames(data))) {
     data <- data %>% dplyr::mutate(`2D/G-ratio` = `2D int` / `G int`)
   }
-  if ('Dp int' %in% colnames(data) & 'D int' %in% colnames(data)) {
+  if (all(c('Dp int', 'D int') %in% colnames(data))) {
     data <- data %>% dplyr::mutate(`D/Dp-ratio` = `D int` / `Dp int`)
   }
   data

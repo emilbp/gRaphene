@@ -17,4 +17,9 @@ Saves the summary df to a csv file (default name is summary.csv)
 \examples{
 gr_cf_summary_save(df_summary)
 }
+\seealso{
+Other curve fit functions: \code{\link{gr_cf_plot_all}},
+  \code{\link{gr_cf_plot}}, \code{\link{gr_cf_read}},
+  \code{\link{gr_cf_summary}}
+}
 \keyword{summary}

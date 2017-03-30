@@ -4,29 +4,29 @@
 \alias{gr_cf_read}
 \title{Load results of graphene curve fit}
 \usage{
-gr_cf_read(path, ext = "txt",
-  peaks = "^((D\\\\s)|(G\\\\s)|(2D\\\\s)|(aC\\\\s)|(DDp\\\\s)|(2Dp\\\\s)|(2Dpp\\\\s)|(SiO2\\\\s)|(Dp\\\\s))",
-  measure = "FWHM|pos|int")
+gr_cf_read(path, ext = "txt")
 }
 \arguments{
 \item{path}{Directory containing the data-files}
 
 \item{ext}{Extension of data-files (default is 'txt')}
-
-\item{peaks}{Regex string detailing the peaks to look for}
-
-\item{measure}{Features to look for, for each peak}
 }
 \description{
 Attempts to load all curve fits in txt files from the specified directory
 }
 \details{
-All files should be named as "<peak> <feature>.txt", e.g. "2D FWHM.txt" and be put in the folder specified under \code{path}
-The script automatically looks for the following peaks (unless other parameters are stated under \code{peaks}): D, G, 2D, aC (amorphous carbon), DDp (D+D'), 2Dp (2D'), 2Dpp (2D''), SiO2. It automatically tries to register the features: FWHM, pos and int.
+All files should be named as "<peak> <feature>.txt", e.g. "2D FWHM.txt" and be put in the folder specified under \code{path}.
+The dataframe that is returned will contain the "<peak> <feature>" as the column names - for this to work, the filenames should only contain letters, numbers and spaces.
 }
 \examples{
 gr_cf_read("data")
 gr_cf_read(system.file('extdata/graphene_curve_fit_export', package = 'gRaphene'))
+}
+\seealso{
+Other curve fit functions: \code{\link{gr_cf_plot_all}},
+  \code{\link{gr_cf_plot}},
+  \code{\link{gr_cf_summary_save}},
+  \code{\link{gr_cf_summary}}
 }
 \keyword{curve}
 \keyword{fit}
