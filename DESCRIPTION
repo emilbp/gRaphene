@@ -1,8 +1,8 @@
 Package: gRaphene
 Type: Package
-Title: Tools for analysis of Raman data
+Title: Tools For Analysis Of Raman Data
 Version: 0.2.0
-Authors@R: person("Emil", "Bjerglund Pedersen", "emilbp@inano.au.dk", role = c("aut", "cre"))
+Authors@R: person("Emil", "Bjerglund Pedersen", email = "emilbp@inano.au.dk", role = c("aut", "cre"))
 Description: A set of functions for analysis of Raman spectroscopy data from Renishaw Wire.
   Contains tools for loading, modifying and plotting both individual spectra, curve fit results
   and spatial maps.
