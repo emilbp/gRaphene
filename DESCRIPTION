@@ -1,11 +1,11 @@
 Package: gRaphene
 Type: Package
-Title: What the Package Does (Title Case)
-Version: 0.1.0
-Author: Who wrote it
-Maintainer: The package maintainer <yourself@somewhere.net>
-Description: More about what it does (maybe more than one line)
-    Use four spaces when indenting paragraphs within the Description.
+Title: Tools for analysis of Raman data
+Version: 0.2.0
+Authors@R: person("Emil", "Bjerglund Pedersen", "emilbp@inano.au.dk", role = c("aut", "cre"))
+Description: A set of functions for analysis of Raman spectroscopy data from Renishaw Wire.
+  Contains tools for loading, modifying and plotting both individual spectra, curve fit results
+  and spatial maps.
 License: MIT | file LICENSE
 Encoding: UTF-8
 LazyData: true
