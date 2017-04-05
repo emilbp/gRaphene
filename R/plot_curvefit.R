@@ -42,15 +42,20 @@ gr_gaussian <- function(x, G, x_0, A) {
 #' Internal function, used by `gr_cf_fit_add`
 #'
 #' @param type Either "Lorentzian" or "Gaussian"
+#' @param perc_gauss 0-100 value indicating the amount of gaussian in a curve of type 'Mixed'
 #' @param ... Arguments passed on to gr_lorentzian() or gr_gaussian()
 #'
 #' @export
 #'
-gr_fit_line <- function(type, ...) {
+gr_fit_line <- function(type, perc_gauss = 0, ...) {
   if (type == "Lorentzian") {
     return(gr_lorentzian(...))
   } else if (type == "Gaussian") {
     return(gr_gaussian(...))
+  } else if (type == "Mixed") {
+    p_gauss = perc_gauss / 100
+    mix <- (1 - p_gauss) * gr_lorentzian(...) + (p_gauss) * gr_gaussian(...)
+    return(mix)
   }
 }
 
@@ -76,7 +81,7 @@ gr_cf_fit_add <- function(spectrum_file, cf_file) {
   spec <- readr::read_tsv(spectrum_file, col_names = c('wavenumber', 'intensity'), skip = 1)# %>% dplyr::select(-index)
 
   for (i in seq_along(cf$`Curve Name`)) {
-    spec[, cf$`Curve Name`[i]] = gr_fit_line(type = cf$Type[i], x = spec$wavenumber, G = cf$Width[i], x_0 = cf$Centre[i], A = cf$Area[i])
+    spec[, cf$`Curve Name`[i]] = gr_fit_line(type = cf$Type[i], perc_gauss = cf$`% Gaussian`[i], x = spec$wavenumber, G = cf$Width[i], x_0 = cf$Centre[i], A = cf$Area[i])
   }
 
   spec <- spec %>%

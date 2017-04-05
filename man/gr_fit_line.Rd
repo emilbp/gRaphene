@@ -4,10 +4,12 @@
 \alias{gr_fit_line}
 \title{Return Lorentzian or Gaussian fit}
 \usage{
-gr_fit_line(type, ...)
+gr_fit_line(type, perc_gauss = 0, ...)
 }
 \arguments{
 \item{type}{Either "Lorentzian" or "Gaussian"}
+
+\item{perc_gauss}{0-100 value indicating the amount of gaussian in a curve of type 'Mixed'}
 
 \item{...}{Arguments passed on to gr_lorentzian() or gr_gaussian()}
 }
